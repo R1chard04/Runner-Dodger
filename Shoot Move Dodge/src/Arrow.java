@@ -38,7 +38,7 @@ public class Arrow extends Rectangle implements Runnable{
 
 	
 		
-	}
+}
 	
 
 
