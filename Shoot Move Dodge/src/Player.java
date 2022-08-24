@@ -2,8 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class Player extends Rectangle{
-	public int health = 100; 
-	public String name = "Player"; 
+	public int PLAYER_HEALTH = 100; 
+	public String PLAYER_NAME = "Player"; 
 	
 	public int xVelocity;
 	public int yVelocity;
@@ -14,9 +14,9 @@ public class Player extends Rectangle{
 	}
 	Player(int health, int speed, String name, int x, int y, int width, int height){
 		super(x, y, width, height);
-		this.health = health;
+		this.PLAYER_HEALTH = health;
 		this.speed = speed;
-		this.name = name;
+		this.PLAYER_NAME = name;
 		
 	}
 	
@@ -71,8 +71,9 @@ public class Player extends Rectangle{
 		g.fillRect(this.x, this.y, this.width, this.height);
 	}
 	
+	
 	public boolean isDead() {
-		return (health <= 0) ? true : false;
+		return (PLAYER_HEALTH <= 0) ? true : false;
 	}
 	
 

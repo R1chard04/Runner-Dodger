@@ -15,24 +15,25 @@ public class GamePanel extends JPanel implements Runnable{
 	
 	
 	Thread gameThread;
-	Thread arrowThread;
 	Image image;
 	Graphics graphics;
 	Random random;
 	Player player;
 	Zombie zombie;
 	Skeleton skeleton;
-	Arrow arrow;
+	//Arrow arrow;
 	
 	GamePanel(){
 		newPlayer();
 		newZombie();
 		newSkeleton();
+		//newArrow();
 		this.setFocusable(true);
 		this.addKeyListener(new AL());
 		
 		gameThread = new Thread(this);
 		gameThread.start();
+
 	}
 	
 	public void newPlayer() {
@@ -49,9 +50,9 @@ public class GamePanel extends JPanel implements Runnable{
 		skeleton = new Skeleton(random.nextInt(1500), random.nextInt(1000), 20, 20);
 	}
 	
-	public void newArrow() {
-		arrow = new Arrow(skeleton.x, skeleton.y, 2, 2);
-	}
+	//public void newArrow() {
+	//	arrow = new Arrow(skeleton.x, skeleton.y, 2, 2);
+	//}
 	
 	public void paint(Graphics g) {
 		image = createImage(getWidth(),getHeight());
@@ -64,16 +65,18 @@ public class GamePanel extends JPanel implements Runnable{
 		player.draw(g);
 		zombie.draw(g);
 		skeleton.draw(g);
-		
+		//if(skeleton.withinRange == true) {
+		//	arrow.draw(g);
+		//}
 	}
 	
 	public void move() {
 		player.move();
 		zombie.move(player.x, player.y);
 		skeleton.move(player.x, player.y);
-		if(skeleton.withinRange == true) {
-			arrow.move(player.x, player.y, skeleton.x, skeleton.y);
-		}
+		//} else {
+		//	arrow.move(player.x, player.y, skeleton.x, skeleton.y);
+		//}
 	}
 	
 	public void checkContact() {
@@ -81,14 +84,23 @@ public class GamePanel extends JPanel implements Runnable{
 			newPlayer();
 			newZombie();
 			newSkeleton();
-			player.health -= 10;
-		} else if((arrow.x >= player.x && arrow.x <= player.x + PLAYER_WIDTH) && (arrow.y >= player.y && arrow.y <= player.y + PLAYER_HEIGHT)) {
-			newPlayer();
-			newZombie();
-			newSkeleton();
-			player.health -=5;
+			player.PLAYER_HEALTH -= 10;
+		//} else if((arrow.x >= player.x && arrow.x <= player.x + PLAYER_WIDTH) && (arrow.y >= player.y && arrow.y <= player.y + PLAYER_HEIGHT)) {
+		//	newPlayer();
+		//	newZombie();
+		//	newSkeleton();
+		//	player.health -=5;
 		}
 	}
+	
+	public void checkHealth() throws InterruptedException {
+		if (player.isDead() == true) {
+			gameThread.sleep(10000);
+		}
+		return;
+	}
+
+	
 	@Override
 	public void run() {
 		long lastTime = System.nanoTime();
@@ -102,6 +114,11 @@ public class GamePanel extends JPanel implements Runnable{
 			if(delta >=1) {
 				move();
 				checkContact();
+				try {
+					checkHealth();
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
 				repaint();
 				delta--;
 			}
@@ -115,5 +132,7 @@ public class GamePanel extends JPanel implements Runnable{
 			player.keyReleased(e);
 			}
 	}
+	
+
 
 }
