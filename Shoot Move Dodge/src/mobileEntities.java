@@ -1,5 +1,5 @@
 
-public class mobileEntities extends Game{
+public class mobileEntities extends GameFrame{
 
 	mobileEntities(){
 		

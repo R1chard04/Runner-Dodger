@@ -10,13 +10,13 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
 
-public class StartPage extends JFrame implements ActionListener{
+public class StartFrame extends JFrame implements ActionListener{
 
 	JButton btnStartGame = new JButton("Start the Game!");
 	JTextField namefield = new JTextField();
 	String name;
 	
-	StartPage(){
+	StartFrame(){
 		
 		this.setTitle("Shoot and Move");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -24,9 +24,10 @@ public class StartPage extends JFrame implements ActionListener{
 		this.setResizable(false);
 		this.getContentPane().setBackground(Color.cyan);
 		this.setLayout(null);
+		this.setLocationRelativeTo(null);
 		
 		//Game title settings
-		JLabel gameTitle = new JLabel("SHOOT AND MOVE!");
+		JLabel gameTitle = new JLabel("Shooter Dodger");
 		gameTitle.setFont(new Font("MV Boli", Font.BOLD, 100));
 		gameTitle.setBounds(250, 200, 1200, 400);
 		this.add(gameTitle);
@@ -62,7 +63,7 @@ public class StartPage extends JFrame implements ActionListener{
 		if(e.getSource()==btnStartGame) {
 			name = namefield.getText();
 			System.out.println("Good luck, " + name + "!");
-			Game game = new Game();
+			GameFrame game = new GameFrame();
 			
 			btnStartGame.setEnabled(false);
 			namefield.setEditable(false);
