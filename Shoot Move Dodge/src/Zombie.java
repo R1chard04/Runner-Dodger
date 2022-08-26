@@ -11,8 +11,8 @@ public class Zombie extends Rectangle{
 	public double xVelocity;
 	public double yVelocity;
 
-	Zombie(int x, int y, int width, int height){
-		super(x, y, width, height);
+	Zombie(double x, double y, int width, int height){
+		super((int)x, (int)y, width, height);
 
 	}
 
@@ -25,7 +25,7 @@ public class Zombie extends Rectangle{
 			double xDist = (Math.abs(xDiff) / totalDistance) * ZOMBIE_SPEED;
 			double yDist = (Math.abs(yDiff) / totalDistance) * ZOMBIE_SPEED;
 			
-			if (xDiff > 0 && yDiff > 0) { //2nd quadrant (i.e. player is TOP LEFT)
+			if (xDiff > 0 && yDiff > 0) { //2nd quadrant (about location of mob)
 				this.x -= xDist;
 				this.y -= yDist;
 			} else if (xDiff > 0 && yDiff < 0){ //3rd quadrant

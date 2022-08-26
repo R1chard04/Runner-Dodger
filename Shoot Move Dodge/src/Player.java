@@ -9,11 +9,11 @@ public class Player extends Rectangle{
 	public int yVelocity;
 	public int speed = 10; 
 	
-	Player(int x, int y, int width, int height){
-		super(x, y, width, height);
+	Player(double x, double y, int width, int height){
+		super((int)x, (int)y, width, height);
 	}
-	Player(int health, int speed, String name, int x, int y, int width, int height){
-		super(x, y, width, height);
+	Player(int health, int speed, String name, double x, double y, int width, int height){
+		super((int)x, (int)y, width, height);
 		this.PLAYER_HEALTH = health;
 		this.speed = speed;
 		this.PLAYER_NAME = name;
