@@ -4,13 +4,13 @@ public class Score extends Rectangle{
 	
 	public static int GAME_WIDTH;
 	public static int GAME_HEIGHT;
-	public int score = -1;
+	public int score = 0;
 	public int health = 100;
 	
 	
 	Score(int GAME_WIDTH, int GAME_HEIGHT){
-		this.GAME_WIDTH = GAME_WIDTH;
-		this.GAME_HEIGHT = GAME_HEIGHT;
+		Score.GAME_WIDTH = GAME_WIDTH;
+		Score.GAME_HEIGHT = GAME_HEIGHT;
 	}
 	
 	public void draw(Graphics g) {

@@ -1,3 +1,4 @@
+package projectiles;
 import java.awt.*;
 
 public class Arrow extends Rectangle{
@@ -13,7 +14,7 @@ public class Arrow extends Rectangle{
 	double yPlayer;
 
 	
-	Arrow(double x, double y, int height, int width, double xPlayer, double yPlayer) {
+	public Arrow(double x, double y, int height, int width, double xPlayer, double yPlayer) {
 		super((int)x, (int)y, height, width);
 		this.xPlayer = xPlayer;
 		this.yPlayer = yPlayer;
@@ -23,14 +24,13 @@ public class Arrow extends Rectangle{
 	
 	public void move() {
 		
-		//TODO: fix the bug: likely due to the update in x,y of arrow (change it to original skeleton x,y)
 		double xDiff = xSkeleton - xPlayer;
 		double yDiff = ySkeleton - yPlayer;
-		double totalHypotenuse = Math.sqrt((Math.pow(xDiff, 2)) + (Math.pow(yDiff, 2)));
+		double totalHypotenuse = Math.sqrt((double)(Math.pow(xDiff, 2.0)) + (double)(Math.pow(yDiff, 2.0)));
 		
 		if(xDiff != 0 && yDiff != 0) {
-			double xDist = (Math.abs(xDiff) / totalHypotenuse) * ARROW_SPEED;
-			double yDist = (Math.abs(yDiff) / totalHypotenuse) * ARROW_SPEED;
+			double xDist = (double)(Math.abs(xDiff) / totalHypotenuse) * ARROW_SPEED;
+			double yDist = (double)(Math.abs(yDiff) / totalHypotenuse) * ARROW_SPEED;
 			
 			if (xDiff > 0 && yDiff > 0) { //2nd quadrant
 				this.x -= xDist;
@@ -47,10 +47,10 @@ public class Arrow extends Rectangle{
 			}
 		}
 		else if(xDiff == 0) {
-			this.y -= (yDiff/Math.abs(yDiff)) * ARROW_SPEED;
+			this.y -= (yDiff / (double)Math.abs(yDiff)) * ARROW_SPEED;
 		}
 		else {
-			this.x -= (xDiff/Math.abs(xDiff)) * ARROW_SPEED;
+			this.x -= (xDiff / (double)Math.abs(xDiff)) * ARROW_SPEED;
 		}
 	}
 	

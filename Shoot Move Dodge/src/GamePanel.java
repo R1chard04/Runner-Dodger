@@ -3,9 +3,17 @@ import java.awt.*;
 import java.util.*;
 import java.awt.event.*;
 
+import buildings.Cannon;
+import mobilesEntities.Skeleton;
+import mobilesEntities.Zombie;
+import projectiles.Arrow;
+import projectiles.Bullet;
+
+
 public class GamePanel extends JPanel implements Runnable{
 	
 	private boolean running = false;
+	
 	
 	static final int GAME_WIDTH = 1500;
 	static final int GAME_HEIGHT = 1000;
@@ -24,6 +32,8 @@ public class GamePanel extends JPanel implements Runnable{
 	Cannon topLeftCannon, topRightCannon, bottomLeftCannon, bottomRightCannon;
 	Arrow arrow1, arrow2, arrow3; 
 	Bullet cannonTL, cannonTR, cannonBL, cannonBR;
+
+	public int counter = 1;
 	
 	GamePanel(){
 		newPlayer();
@@ -36,7 +46,6 @@ public class GamePanel extends JPanel implements Runnable{
 		this.setFocusable(true);
 		this.addKeyListener(new AL());
 		
-
 		gameThread = new Thread(this);
 		gameThread.start();
 
@@ -192,7 +201,7 @@ public class GamePanel extends JPanel implements Runnable{
 				|| (arrow2.x >= player.x && arrow2.x <= player.x + PLAYER_WIDTH && arrow2.y >= player.y && arrow2.y <= player.y + PLAYER_HEIGHT)
 				|| (arrow3.x >= player.x && arrow3.x <= player.x + PLAYER_WIDTH && arrow3.y >= player.y && arrow3.y <= player.y + PLAYER_HEIGHT)){
 			player.PLAYER_HEALTH -= 1;
-			scoreboard.health -= 2;
+			scoreboard.health -= 1;
 			return;
 		}
 		else if((cannonTL.x >= player.x && cannonTL.x <= player.x + PLAYER_WIDTH && cannonTL.y >= player.y && cannonTL.y <= player.y + PLAYER_HEIGHT)
@@ -213,7 +222,6 @@ public class GamePanel extends JPanel implements Runnable{
 			newSkeleton();
 			scoreboard = new Score(GAME_WIDTH, GAME_HEIGHT);
 			Thread.sleep(1000);
-			//scoreThread.stop();
 			
 		}
 		return;
@@ -225,8 +233,6 @@ public class GamePanel extends JPanel implements Runnable{
 			scoreboard.score++;
 		}
 	}
-
-	int counter = 1;
 	
 	@Override
 	public void run() {
@@ -248,7 +254,6 @@ public class GamePanel extends JPanel implements Runnable{
 					e.printStackTrace();
 				}
 				addScore();
-				System.out.println("SCORE: " +scoreboard.score);
 				repaint();
 				counter++;
 				delta--;

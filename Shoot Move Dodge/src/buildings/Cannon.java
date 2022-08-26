@@ -1,3 +1,4 @@
+package buildings;
 import java.awt.*;
 
 public class Cannon extends Rectangle{
@@ -6,7 +7,7 @@ public class Cannon extends Rectangle{
 	private int CANNON_HEIGHT = 20;
 	private int CANNON_WIDTH = 20;
 	
-	Cannon(double x, double y, int width, int height){
+	public Cannon(double x, double y, int width, int height){
 		super ((int)x, (int)y, width, height);
 	}
 	

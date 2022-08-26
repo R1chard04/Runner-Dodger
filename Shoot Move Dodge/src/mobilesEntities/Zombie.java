@@ -1,24 +1,22 @@
+package mobilesEntities;
 import java.awt.*;
 import java.util.*;
 
-public class Zombie extends Rectangle{
+public class Zombie extends Rectangle implements MobileEntities{
 	
 	private int ZOMBIE_HEALTH = 20;
 	private Color ZOMBIE_COLOR = Color.green;
-	public double ZOMBIE_SPEED = 2.0;
-	
-	Random random = new Random();
-	public double xVelocity;
-	public double yVelocity;
+	public double ZOMBIE_SPEED = 5.0;
 
-	Zombie(double x, double y, int width, int height){
+	public Zombie(double x, double y, int width, int height){
 		super((int)x, (int)y, width, height);
 
 	}
-
-	public void move(int x, int y) {
-		double xDiff = this.x - (double)x;
-		double yDiff = this.y - (double)y;
+	
+	@Override
+	public void move(int xPlayer, int yPlayer) {
+		double xDiff = this.x - (double)xPlayer;
+		double yDiff = this.y - (double)yPlayer;
 		
 		if(xDiff != 0 && yDiff != 0) {
 			double totalDistance = Math.sqrt((xDiff*xDiff) + (yDiff * yDiff));
@@ -47,12 +45,14 @@ public class Zombie extends Rectangle{
 		}
 	}
 	
+	@Override
 	public void draw(Graphics g) {
 		g.setColor(ZOMBIE_COLOR);
 		g.fillOval(x, y, height, width);
 	}
 	
-	boolean isDead() {
+	@Override
+	public boolean isDead() {
 		return (ZOMBIE_HEALTH <= 0) ? true : false;
 	}
 	

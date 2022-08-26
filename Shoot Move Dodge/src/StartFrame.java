@@ -12,13 +12,23 @@ import javax.swing.JTextField;
 
 public class StartFrame extends JFrame implements ActionListener{
 
-	JButton btnStartGame = new JButton("Start the Game!");
-	JTextField namefield = new JTextField();
+	JLabel gameTitle;
+	JButton btnStartGame;
+	JTextField namefield;
+	JLabel nameText;
+	JLabel instructions;
+	String instructionText = "<html>"
+							 + "Instructions: <br/>"
+							 + "1. Select a name for yourself. <br/>"  
+							 + "2. As the player, you'll be controlling the red square. Your goal is to run and dodge EVERYTHING! (pun intended) <br/>"
+							 + "3. You'll be starting automatically once you click \"Start the game\", so there's no going back... be ready! <br/>"
+							 + "4. GOOD LUCK! "
+							 + "</html>";
 	String name;
 	
 	StartFrame(){
 		
-		this.setTitle("Shoot and Move");
+		this.setTitle("Runner Dodger");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setSize(1500, 1000);
 		this.setResizable(false);
@@ -26,32 +36,49 @@ public class StartFrame extends JFrame implements ActionListener{
 		this.setLayout(null);
 		this.setLocationRelativeTo(null);
 		
-		//Game title settings
-		JLabel gameTitle = new JLabel("Shooter Dodger");
-		gameTitle.setFont(new Font("MV Boli", Font.BOLD, 100));
-		gameTitle.setBounds(250, 200, 1200, 400);
+		//Game title
+		gameTitle = new JLabel("Runner Dodger");
+		gameTitle.setFont(new Font("MV Boli", Font.BOLD, 125));
+		gameTitle.setBounds(300, 200, 1200, 400);
 		this.add(gameTitle);
 		
-		//text field settings for player's name
+		//text field for player's name
+		namefield = new JTextField();
 		namefield.setPreferredSize(new Dimension(250, 40));
-		namefield.setBounds(600, 500, 200, 50);
+		namefield.setBounds(600, 500, 300, 50);
 		namefield.setForeground(Color.black);
 		namefield.setBackground(Color.green);
 		namefield.setText("Player");
 		this.add(namefield);
 		
-		//start button settings
+		//start button
+		btnStartGame = new JButton("Start the Game!");
 		btnStartGame.setFont(new Font("MV Boli", Font.BOLD, 50));
 		btnStartGame.setBounds(520, 600, 500, 100);
 		btnStartGame.addActionListener(this);
 		btnStartGame.setOpaque(true);
 		btnStartGame.setForeground(Color.orange);
-		btnStartGame.setBackground(Color.MAGENTA);
+		btnStartGame.setBackground(Color.black);
 		btnStartGame.setHorizontalAlignment(JButton.CENTER);
 		btnStartGame.setVerticalAlignment(JButton.CENTER);
 		btnStartGame.setFocusable(false);
 		btnStartGame.setBorder(BorderFactory.createEtchedBorder());
 		this.add(btnStartGame);
+		
+		//text field for instructions
+		instructions = new JLabel();
+		instructions.setText(instructionText);
+		instructions.setFont(new Font("MV Boli", Font.PLAIN, 20));
+		instructions.setBounds(250, 800, 1200, 150);
+		this.add(instructions);
+		
+		//text field prompting user for name
+		nameText = new JLabel();
+		nameText.setText("Enter player name:");
+		nameText.setFont(new Font("MV Boli", Font.PLAIN, 20));
+		nameText.setForeground(Color.black);
+		nameText.setBounds(400, 500, 200, 50);
+		this.add(nameText);
 		
 		this.setVisible(true);
 	}
@@ -63,7 +90,7 @@ public class StartFrame extends JFrame implements ActionListener{
 		if(e.getSource()==btnStartGame) {
 			name = namefield.getText();
 			System.out.println("Good luck, " + name + "!");
-			GameFrame game = new GameFrame();
+			new GameFrame();
 			
 			btnStartGame.setEnabled(false);
 			namefield.setEditable(false);

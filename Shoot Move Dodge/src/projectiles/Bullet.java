@@ -1,6 +1,7 @@
+package projectiles;
 import java.awt.*;
 
-public class Bullet extends Rectangle{
+public class Bullet extends Rectangle implements Projectiles{
 	
 	public int BULLET_WIDTH = 10;
 	public int BULLET_HEIGHT = 10;
@@ -9,7 +10,7 @@ public class Bullet extends Rectangle{
 	
 	double xTarget, yTarget;
 	
-	Bullet(double x, double y, int width, int height,  double xTarget, double yTarget){
+	public Bullet(double x, double y, int width, int height,  double xTarget, double yTarget){
 		super ((int)x, (int)y, width, height);
 
 		this.xTarget = xTarget;
